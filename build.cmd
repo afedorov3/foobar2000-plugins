@@ -69,6 +69,7 @@ if exist bin\ (
   echo.=   bin\Release\foo_tracklog.fb2k-component created   =
   echo.=                                                     =
   echo.=======================================================
+  echo.
 
   rd /s /q %~dp0bin\Release\x64 2>nul
   rd /s /q %~dp0bin\Release\Win32 2>nul
