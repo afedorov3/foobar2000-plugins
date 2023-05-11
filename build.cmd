@@ -77,7 +77,7 @@ if exist bin\ (
   goto releasedone
 
 :releasefail
-  echo,
+  echo.
   echo.*** FAILURE releasing files ***
   echo.
 
