@@ -33,8 +33,8 @@ if not %x86status% == 0 (
   echo.
 )
 
-if not %x64status% == 0 goto cleanup
-if not %x86status% == 0 goto cleanup
+if not %x64status% == 0 goto exit
+if not %x86status% == 0 goto exit
 
 if exist bin\ (
 
