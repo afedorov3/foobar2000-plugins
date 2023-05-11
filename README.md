@@ -22,6 +22,6 @@ Optionally, the solution can be built using Visual Studio Build Tools by running
 Developer Command Prompt. It builds for both x64 and x86 platforms.
 
 If your build fails due to absent **atlapp.h** file, download and unpack
-[WTL library](https://sourceforge.net/projects/wtl/files/WTL%2010/) to the new WTL directory inside
-the SDK root directory. And add path to **WTL/Include** directory to the C/C++ Additional Include Directories
+[WTL library](https://sourceforge.net/projects/wtl/files/WTL%2010/) to the new **WTL** directory inside
+the SDK root directory. Add path to **WTL/Include** directory to the C/C++ Additional Include Directories
 for both **foobar2000_sdk_helpers** and **libPPUI** projects.
