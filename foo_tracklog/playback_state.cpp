@@ -71,7 +71,7 @@ static DWORD WINAPI fileLogThreadProc(LPVOID lpParameter)
 			pfname = job->fname;
 		} else if (GetLastError() == ERROR_SHARING_VIOLATION && delay < 100) { // max approx 150ms
 			Sleep(delay);
-            delay *= 2;
+			delay *= 2;
 			continue;
 		}
 		break;
