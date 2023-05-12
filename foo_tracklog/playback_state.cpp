@@ -1,5 +1,4 @@
 #include <helpers/foobar2000+atl.h>
-#include <time.h>
 
 #include "preferences.h"
 
@@ -17,7 +16,7 @@ static LPWSTR MBS2WCS(pfc::string8 mbs)
 
 	bufsz = MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, mbs.c_str(), -1, NULL, 0);
 	if (bufsz == 0)
-		return 0;
+		return NULL;
 	ret = new WCHAR[bufsz];
 	if (ret == NULL)
 		return NULL;
@@ -70,14 +69,13 @@ static DWORD WINAPI fileLogThreadProc(LPVOID lpParameter)
 			WriteFile(logFile, NL, sizeof(NL) - 1, &written, NULL);
 			CloseHandle(logFile);
 			pfname = job->fname;
-		} else if (GetLastError() == ERROR_SHARING_VIOLATION) {
+		} else if (GetLastError() == ERROR_SHARING_VIOLATION && delay < 100) { // max approx 150ms
 			Sleep(delay);
-			if (delay < 640) { // max delay approx 0.5S
-				delay *= 2;
-				continue;
-			}
+            delay *= 2;
+			continue;
 		}
-	} while (0);
+		break;
+	} while (1);
 
 	delete[] fname;
 	delete job;
@@ -87,9 +85,9 @@ static DWORD WINAPI fileLogThreadProc(LPVOID lpParameter)
 class CTrackLog : public play_callback_static
 {
 	unsigned int get_flags(void)
-    {
-        return flag_on_playback_dynamic_info_track|flag_on_playback_new_track;
-    }
+	{
+		return flag_on_playback_dynamic_info_track|flag_on_playback_new_track;
+	}
 
 	// Playback callback methods.
 	void on_playback_new_track(metadb_handle_ptr p_track) { newtrack(p_track); }

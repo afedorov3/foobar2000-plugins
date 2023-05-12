@@ -1,8 +1,8 @@
 # foobar2000 plugins
 
 ## Ducking control
-Controls response to system ducking (volume reduce) events.  
-Opt in by default.  
+Controls response to system ducking (volume reduce) events  
+Opt in by default  
 To opt out, enable  
 **Preferences - Advanced - Tools - Ducking control - Opt out**
 
