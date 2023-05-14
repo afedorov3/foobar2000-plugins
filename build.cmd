@@ -36,61 +36,66 @@ if not %x86status% == 0 (
 if not %x64status% == 0 goto exit
 if not %x86status% == 0 goto exit
 
-if exist bin\ (
-
-  cd %~dp0bin\Release || goto releasefail
-
-  if exist foo_ducking.fb2k-component del foo_ducking.fb2k-component
-  if exist foo_tracklog.fb2k-component del foo_tracklog.fb2k-component
-
-  cd %~dp0bin\Release\Win32 || goto releasefail
-  7z a -bso0 -tzip -mx9 -sae %~dp0bin\Release\foo_ducking.fb2k-component foo_ducking.dll || (
-    del %~dp0bin\Release\foo_ducking.fb2k-component 2>nul
-    goto releasefail
-  )
-  7z a -bso0 -tzip -mx9 -sae %~dp0bin\Release\foo_tracklog.fb2k-component foo_tracklog.dll || (
-    del %~dp0bin\Release\foo_tracklog.fb2k-component 2>nul
-    goto releasefail
-  )
-  cd %~dp0bin\Release || goto releasefail
-  7z a -bso0 -tzip -mx9 -sae foo_ducking.fb2k-component x64\foo_ducking.dll || (
-    del foo_ducking.fb2k-component 2>nul
-    goto releasefail
-  )
-  7z a -bso0 -tzip -mx9 -sae foo_tracklog.fb2k-component x64\foo_tracklog.dll || (
-    del foo_tracklog.fb2k-component 2>nul
-    goto releasefail
-  )
-
+7z --help >nul 2>&1 || (
   echo.
-  echo.=======================================================
-  echo.=                                                     =
-  echo.=   bin\Release\foo_ducking.fb2k-component created    =
-  echo.=   bin\Release\foo_tracklog.fb2k-component created   =
-  echo.=                                                     =
-  echo.=======================================================
+  echo.*** No 7-zip detected, release files generation skipped ***
   echo.
-
-  rd /s /q %~dp0bin\Release\x64 2>nul
-  rd /s /q %~dp0bin\Release\Win32 2>nul
-
-  goto releasedone
-
-:releasefail
-  echo.
-  echo.*** FAILURE releasing files ***
-  echo.
-
-:releasedone
-  cd %~dp0 || goto exit
-
+  goto cleanup
 )
 
+cd %~dp0bin\Release || goto releasefail
+
+if exist foo_ducking.fb2k-component del foo_ducking.fb2k-component
+if exist foo_tracklog.fb2k-component del foo_tracklog.fb2k-component
+
+cd %~dp0bin\Release\Win32 || goto releasefail
+7z a -bso0 -tzip -mx9 -sae %~dp0bin\Release\foo_ducking.fb2k-component foo_ducking.dll || (
+  del %~dp0bin\Release\foo_ducking.fb2k-component 2>nul
+  goto releasefail
+)
+7z a -bso0 -tzip -mx9 -sae %~dp0bin\Release\foo_tracklog.fb2k-component foo_tracklog.dll || (
+  del %~dp0bin\Release\foo_tracklog.fb2k-component 2>nul
+  goto releasefail
+)
+cd %~dp0bin\Release || goto releasefail
+7z a -bso0 -tzip -mx9 -sae foo_ducking.fb2k-component x64\foo_ducking.dll || (
+  del foo_ducking.fb2k-component 2>nul
+  goto releasefail
+)
+7z a -bso0 -tzip -mx9 -sae foo_tracklog.fb2k-component x64\foo_tracklog.dll || (
+  del foo_tracklog.fb2k-component 2>nul
+  goto releasefail
+)
+
+echo.
+echo.=======================================================
+echo.=                                                     =
+echo.=   bin\Release\foo_ducking.fb2k-component created    =
+echo.=   bin\Release\foo_tracklog.fb2k-component created   =
+echo.=                                                     =
+echo.=======================================================
+echo.
+
+rd /s /q %~dp0bin\Release\x64 2>nul
+rd /s /q %~dp0bin\Release\Win32 2>nul
+
+goto releasedone
+
+:releasefail
+echo.
+echo.*** FAILURE releasing files ***
+echo.
+
+:releasedone
+cd %~dp0 || goto exit
+
+:cleanup
 if exist %~dp0build rd /s /q %~dp0build 2>nul
-if exist %~dp0foobar2000_component_client\Release rd /s /q %~dp0foobar2000_component_client\Release 2>nul
+if exist %~dp0foobar2000\foobar2000_component_client\Release rd /s /q %~dp0foobar2000\foobar2000_component_client\Release 2>nul
 goto exit
 
 :nodevenv
+echo.MSVC is not available
 echo.Start this script from the Developer Command Prompt
 
 :exit

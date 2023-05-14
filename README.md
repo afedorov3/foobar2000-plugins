@@ -13,7 +13,7 @@ Settings:
 
 ## Source build instructions
 1. Download and unpack [foobar2000 SDK](https://www.foobar2000.org/SDK) from the official site.  
-2. Place content of this repository in the foobar2000 directory of the SDK root.  
+2. Place content of this repository in the SDK root directory.  
 4. Open foo_SDK.sln in Visual Studio, select desired configuration and platform.
 Adjust Platform Toolset to suit your Visual Studio version.  
 5. Build the solution.  
