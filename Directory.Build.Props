@@ -4,4 +4,10 @@
     <OutDir>$(SolutionDir)bin\$(Configuration)\$(Platform)\</OutDir>
     <IntDir>$(SolutionDir)build\$(ProjectName)\$(Configuration)\$(Platform)\</IntDir>
   </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalOptions>/I../WTL/Include /I../../WTL/Include</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>  
 </Project>

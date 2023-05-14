@@ -15,10 +15,10 @@ Settings:
 1. Download and unpack [foobar2000 SDK](https://www.foobar2000.org/SDK) from the official site.  
 2. Place content of this repository in the SDK root directory.  
 4. Open foo_SDK.sln in Visual Studio, select desired configuration and platform.
-Adjust Platform Toolset to suit your Visual Studio version.  
+Adjust Platform Toolset to suit your Visual Studio version if required.  
 5. Build the solution.  
 
-Optionally, the solution can be built using Visual Studio Build Tools by running **build.cmd** script from the
+Alternatively, the solution can be built using Visual Studio Build Tools by running **build.cmd** script from the
 Developer Command Prompt. It builds for both x64 and x86 platforms.
 
 If your build fails due to absent **atlapp.h** file, download and unpack
